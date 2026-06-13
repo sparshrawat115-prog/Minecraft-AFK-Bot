@@ -1,6 +1,6 @@
 {
-  "serverHost": "example.aternos.me",
-  "serverPort": 12345,
-  "botUsername": "MyBot",
+  "serverHost": "karmasmp.ddns.net",
+  "serverPort": 25565,
+  "botUsername": "SamAFK",
   "botChunk": 1
 }
