@@ -2,13 +2,12 @@ const mineflayer = require('mineflayer');
 const config = require('./config.json');
 
 const bot = mineflayer.createBot({
-  host: config.serverHost,
-  port: config.serverPort,
-  username: config.botUsername,
-  auth: 'offline',
-  version: false,
-  viewDistance: config.botChunk
-});
+    host: settings.host,
+    port: settings.port,
+    username: settings.username,
+    viewDistance: 4, // Completely hardcoded clean integer
+    auth: 'offline'
+  });
 
 let movementPhase = 0;
 const STEP_INTERVAL = 1500;
