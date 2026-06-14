@@ -23,7 +23,7 @@ function createBot() {
     host: settings.host,
     port: settings.port,
     username: settings.username,
-    viewDistance: settings.viewDistance, // Strict number value
+    viewDistance: 4, // Completely hardcoded clean integer
     auth: 'offline'
   });
 
