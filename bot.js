@@ -8,12 +8,12 @@ try {
 }
 
 const settings = {
-  host: process.env.SERVER_HOST || config.serverHost || "yourserver.aternos.me",
+  host: process.env.SERVER_HOST || config.serverHost || "karmasmp.ddns.net",
   port: parseInt(process.env.SERVER_PORT || config.serverPort) || 25565,
   username: process.env.BOT_USERNAME || config.botUsername || "AFK_Bot",
-  viewDistance: parseInt(process.env.BOT_CHUNK || config.botChunk) || 4,
+  viewDistance: parseInt(process.env.BOT_CHUNK || config.botChunk) || 4, // Ensures it's a number
   owner: process.env.BOT_OWNER || "",
-  password: process.env.BOT_PASSWORD || "" // Pulls securely from Railway
+  password: process.env.BOT_PASSWORD || "" 
 };
 
 function createBot() {
@@ -23,12 +23,12 @@ function createBot() {
     host: settings.host,
     port: settings.port,
     username: settings.username,
-    viewDistance: `${settings.viewDistance}c`,
+    viewDistance: settings.viewDistance, // FIXED: Removed the trailing 'c' template literal string
     auth: 'offline'
   });
 
   bot.on('spawn', () => {
-    console.log(`✓ ${bot.username} joined the server lattice.`);
+    console.log(`✓ ${bot.username} successfully spawned in the server!`);
     
     // Anti-AFK Routine
     setInterval(() => {
@@ -40,17 +40,12 @@ function createBot() {
 
   // --- AUTOMATED AUTHME HANDLER ---
   bot.on('messagestr', (message) => {
-    if (!settings.password) {
-      console.log("[AuthMe Warning] AuthMe prompt detected, but BOT_PASSWORD variable is missing in Railway!");
-      return;
-    }
+    if (!settings.password) return;
 
-    // Detects if the server requires account registration
     if (message.includes('/register')) {
       console.log("[AuthMe] Server requested account registration. Processing...");
       bot.chat(`/register ${settings.password} ${settings.password}`);
     } 
-    // Detects if the account is already registered and requires login
     else if (message.includes('/login')) {
       console.log("[AuthMe] Server requested login. Processing...");
       bot.chat(`/login ${settings.password}`);
