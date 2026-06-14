@@ -11,7 +11,7 @@ const settings = {
   host: process.env.SERVER_HOST || config.serverHost || "karmasmp.ddns.net",
   port: parseInt(process.env.SERVER_PORT || config.serverPort) || 25565,
   username: process.env.BOT_USERNAME || config.botUsername || "AFK_Bot",
-  viewDistance: parseInt(process.env.BOT_CHUNK || config.botChunk) || 4, // Ensures it's a number
+  viewDistance: 4, // Hardcoded to a strict integer to completely eliminate string parsing issues
   owner: process.env.BOT_OWNER || "",
   password: process.env.BOT_PASSWORD || "" 
 };
@@ -23,7 +23,7 @@ function createBot() {
     host: settings.host,
     port: settings.port,
     username: settings.username,
-    viewDistance: settings.viewDistance, // FIXED: Removed the trailing 'c' template literal string
+    viewDistance: settings.viewDistance, // Strict number value
     auth: 'offline'
   });
 
